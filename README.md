@@ -1,218 +1,331 @@
-# PP4
+ PP4
 
-## Goal
+## Ziel
 
-In this exercise you will:
+In dieser Übung werden Sie:
 
-* Use SSH to connect to remote servers from WSL, macOS, or Linux shells, understanding the handshake and authentication process.
-* Generate an Ed25519 SSH key pair and explain the concept of digital signatures.
-* Configure your local SSH client via the `~/.ssh/config` file for streamlined access.
-* Securely copy files between local and remote hosts using `scp`, including local-to-remote, remote-to-local, and remote-to-remote transfers.
-* Automate startup tasks on the remote server by writing a shell script that runs at login and explaining the role of `~/.bashrc` vs. `~/.profile`.
+* Wenden Sie SSH, um von WSL-, macOS- oder Linux-Shells aus einer Bindung zu Remote-Servern-Herzustellen und dabei den Handshake- und Authentifizierungsprozessen zu verstehen.
+* Generieren Sie ein Ed25519 SSH-Schlüsselpaar und verstehen Sie das Konzept digitaler Signaturen.
+* Konfigurieren Sie Ihre lokalen SSH-Client über die `~/.ssh/config` Datum für optimierte Zugriff.
+* Köpere Sie Dateien sicherer zwischen Lokalen und Remote-Hosts mit `scp`, einschließe Übertragungen von lokal nach remote, von remote nach lokal und von remote nach remote.
+* Automatisieren Sie Startaufgaben auf dem Remote-Server, indem Sie ein Shell-Skript schreiben, das bei der Mischung aus Weiß, und die Rolle von Erklen `~/.bashrc` vs. `~/.profil`.
 
-**Important:** Start a stopwatch when you begin and work uninterruptedly for **90 minutes**. Once time is up, stop immediately and record exactly where you paused.
+**Wichtig:** Beginnen Sie eine Stoppuhr, wenn Sie beginnen, und arbeiten Sie unterbieten für **90 Minuten**. Sobald die Zeit aufstehen ist, halten Sie sofort und zeichen Sie genau auf, wo Sie halten haben.
 
 ---
 
 ## Workflow
 
-1. **Fork** this repository
-2. **Modify & commit** your solution
-3. **Submit your link for Review**
+1. **Gabel** Dieses-Repository
+2. **Andern und Festschreiben** Ihre Lösung
+3. **Senden Sie Ihren Link zur Übervorbereitung**
 
 ---
 
-## Prerequisites
+## Voraussetzungen
 
-* Several starter repos are available here:
+* Hier stehen mehrere Starter-Repos zur Verpackung:
   [https://github.com/orgs/STEMgraph/repositories?q=SSH%3A](https://github.com/orgs/STEMgraph/repositories?q=SSH%3A)
-* Consult the SSH and SCP man-pages for detailed options and explanations:
+* Ausführende Optionen und Erklärungen finden Sie auf den Manpages von SSH und SCP:
 
-  * `man ssh`
-  * `man scp`
+  * `Mann, pssst`
+  * `Mann SCP`
 
 ---
 
-## Tasks
+## Aufgaben
 
-### Task 1: SSH Login
+### Aufgabe 1: SSH-Login
 
-**Objective:** Establish an SSH connection and observe each stage of the process.
+**Ziel:** Stellen Sie eine SSH-Verbindung her und beobachten Sie jede Phase des Prozesses.
 
-1. From your local shell (WSL, macOS Terminal, or Linux), log into the `vorlesungsserver` (or any other remote machine of your choice, e.g. your own raspberry pi):
+1. Melodien Sie sich von Ihr lokalen Shell (WSL, macOS Terminal oder Linux) aus bei der an `vorlesungsserver` (oder eine andere Fernmaschine Ihr Wahl, zB Ihr eigener Raspberry Pi):
 
    ```bash
    ssh -v youruser@remotehost
    ```
-2. Carefully observe and note each step:
+2. Beobachten und notieren Sie jeden Schritt sorgfältig:
 
-   * **TCP connection** to port 22 on `remotehost`.
-   * **SSH protocol handshake**: key exchange and algorithm negotiation.
-   * **Authentication**: public-key or password exchange.
-   * **Shell allocation**: your remote session starts.
-3. After login, exit the session with `exit`.
+   * **TCP-Verbindung** zu Port 22 auf `Remotehost`.
+   * **SSH-Protokoll-Handshake**: Schlüsselaustausch und Algorithmusverarbeitung.
+   * **Authentifizierung**: Austausch öffentlicher Schlüssel oder Passwörter.
+   * **Shell-Zuweisung**: Ihre Fernsitzung begann.
+3. Nach der Ansprache beenden Sie die Sitzung mit `Ausgang`.
 
-**Provide:**
+**Bereitstellen:**
 
 ```bash
-# 1) The exact ssh command you ran
-# 2) A detailed, step-by-step explanation of what happened at each stage
+# 1) Der Genaue SSH-Befehl, den Sie ausschütz haben
+# 2) Eine detaillierte Erklärung, Krieg in der Jeder-Phase passitert ist
 ```
+1) Exakter SSH-Befehl:
+ssh -v anaonymos@teuschlan
+
+2) Schritt-für-Schritt-Erklärung:
+
+Zum Kauf meiner lokalen Rechners eine TCP-Verbindung zum Remote-Host auf Port 22 auf. Danach beginnt der SSH-Protokoll-Handshake: Client und Server tauschen Versionsinformationen aus, handeln kryptografische Algorithmen aus und für einen Schlüsselaustausch durch. Das heißt, wird ein gemeinsames Sitzungsgeheimnis erzeugt, mit dem die weite Bindung verschlselt wird. Anschließender Authentifikator sich der Benutzer, entweder mit Passwort oder mit einem glaubenden Schlüssel, bei dem der Kunde eine Challenge mes dem privatisierten Schlüssel signiert. Nach ergreicher Authentifizierung weist der Server eine Shell zu, sodass ich auf dem entfernten System ausfür können befehle. Die Sitzung wurde mit dem Befehl beendet.
+
 
 ---
 
-### Task 2: Ed25519 Key Pair
+### Aufgabe 2: Ed25519 Schlüsselpaar
 
-**Objective:** Create a secure key pair and explain how digital signatures verify identity.
+**Ziel:** Erste Stellen Sie ein sicheres Schlüsselpaar und erste Sie, wie digitale Signaturen die Identität überprüfen.
 
-1. Generate an Ed25519 SSH key pair:
+1. Generieren Sie ein Ed25519 SSH-Schlüsselpaar:
 
    ```bash
    ssh-keygen -t ed25519 -C "your_email@example.com"
-   ```
+ Ziel##
 
-   * Accept the default file location (`~/.ssh/id_ed25519`). Or provide the `-f <filepath>` option additionally.
-   * Enter a passphrase when prompted (optional).
-2. Locate and inspect your `id_ed25519` (private key) and `id_ed25519.pub` (public key).
-3. Install your key on the remote machine (e.g. `vorlesungsserver`.
-4. Explain in writing:
+   * Aktieptieren Sie den Standarddateispeicherort (`~/.ssh/id_ed25519`). Oder stellen Sie die `-f <Dateipfad>` Option zuzätlich.
+   * Werden Sie bei entsprechender Aufforderung einer Passphrase ein (optional).
+2. Lokalisieren und Inspizieren Sie Ihre `id_ed25519` (Privater Schlüssel) und `id_ed25519.pub` (öffentlicher Schlüssel).
+3. Installieren Sie Ihren Schlüssel auf dem Remote-Computer (z. B. `vorlesungsserver`.
+4. Schriftlich erklären:
 
-   * How the **private key** is used to sign challenges.
-   * How the **public key** on the server verifies signatures without revealing the private key.
-   * Why Ed25519 is preferred (performance, security).
+   * Wie sterben **Privater Schlüssel** wird zum Signieren von Herausforderungen verwendet.
+   * Wie sterben **Öffentlicher Schlüssel** auf dem Server überfür Signaturen, ohne die privaten Schlüsselpreise.
+   * Warum Ed25519 bevorzugt wird (Leistung, Sicherheit).
 
-**Provide:**
+**Bereitstellen:**
 
 ```bash
-# 1) The ssh-keygen command you ran
-# 2) The file paths of the generated keys
-# 3) Your written explanation (3–5 sentences) of the signature process
+# 1) Der von Ihnen ausgeführte Befehl ssh-keygen
+# 2) Die Dateipfade der generierten Schlüssel
+# 3) Ihre schriftliche Erklärung (3–5 Sitze) zum Signaturprozess
 ```
+1) Ausgeber ssh-keygen-Befehl:
+
+ssh-keygen -t ed25519 -C "teusch.marce@stud.thga.de"
+
+2) Dateipfade der erzeugten Schlüssel:
+
+Privater Schlüssel:
+~/.ssh/id_ed25519
+
+Öffentlicher Schlüssel:
+~/.ssh/id_ed25519.pub
+
+Installation des freien Schlüssels auf dem Remote-Server:
+
+ssh-copy-id -i ~/.ssh/id_ed25519.pub anaonymos@teuschlan
+
+3) Erklärung des Signaturprozesses:
+Der private Schlüssel kann sich auf meinen lokalen Rechner ausetzen und niemals einen Server übertragen. Bei der Anmeldung zum Server eine Challenge, die der SSH-Client mit dem privaten Schlüssel digital signiert. Der Server prüft diese Signatur mit dem hinterlegten über Schlüssel in ~/.ssh/authorized_keys und kann dadurch feststellen, dass der Client den passenden privaten Schlüsselsitz. Aus dem freien Schlüssel kann der private Schlüssel nicht bereschnet werden. Ed25519 wird bevorzugt, wohl es sich um Schlüssel, Schnelle Signaturen und ein modernes Sicherheitsniveau werden behandelt.
 
 ---
 
-### Task 3: SSH Config File
+--- Ziel
 
-**Objective:** Simplify SSH commands via `~/.ssh/config`.
+m#Ziel:** Vereinfachen Sie SSH-Befehle über `~/.ssh/config`.
 
-1. Open (or create) `~/.ssh/config` in `vim`.
-2. Add entries for your hosts, for example:
+1. Öffnen (oder erste) `~/.ssh/config` in `vim`.
+2. Für Sie Einträge für Ihre Gastgeber hinzu, zum Beispiel:
 
-   ```text
+   ```Text
    Host my-remote
        HostName remote.example.com
-       User youruser
+       Benutzer youruser
        IdentityFile ~/.ssh/id_ed25519
 
-   Host backup-server
+   Host-Backup-Server
        HostName backup.example.com
-       User backupuser
-       Port 2222
+       Nutzersicherungsbenutzer
+       Hafen 2222
        IdentityFile ~/.ssh/id_ed25519_backup
    ```
-3. Save and close the file, then test:
+3. Sprecher und Schichten Sie die Datei und testen Sie dann:
 
    ```bash
    ssh my-remote
-   ssh backup-server
+   SSH-Backup-Server
    ```
-4. Explain:
+4. Erklären:
 
-   * How SSH reads `~/.ssh/config` and matches hosts.
-   * The difference between `HostName` and `Host`.
-   * How aliases prevent long commands.
+   * Wie SSH liest `~/.ssh/config` und spielt Gastgeber.
+   * Der Unterschied zwischen `Hostname` und `Gastgeber`.
+   * Wie Aliase lange Befehle hinter.
 
-**Provide:**
+**Bereitstellen:**
 
-```text
-# 1) The full contents of your ~/.ssh/config
-# 2) A short explanation (3–4 sentences) of how the config simplifies connections
+```Text
+# 1) Der volle Halt Ihrer ~/.ssh/config
+# 2) Eine kurze Erklärung (3–4 Sitze), wie die Konfigurationsbindungen vereinfacht
 ```
+
+1) Halt von ~/.ssh/config:
+
+Gastgeber Teuschlan
+    Hostname 192.168.0.244
+    Benutzer anonymos
+    IdentityFile ~/.ssh/id_ed25519
+
+Host-Backup-Server
+    Hostname 192.168.0.224
+    Benutzer anonymos
+    Hafen 2222
+    IdentityFile ~/.ssh/id_ed25519
+
+2) Testbefehle:
+
+ssh teuschlan
+SSH-Backup-Server
+
+3) Erklärung:
+
+Die Datei ~/.ssh/config wird vom SSH-Client gelesen, vor einer Bindung aufbaut wird. Der Wert hinter Host ist der Alias, der ich lokal im SSH-Befehl Andern, wehrend HostName der tatsächlichen DNS-Name oder die IP-Adresse des Zielsystems ist. Durch diese Konfiguration muss ich mich nicht mit Mal Benutzername, Hostname, Port oder Schlüsseldatei vollstellen eintippen. Statt ssh anaonymos@teuschlan -i ~/.ssh/id_ed25519 reich zum Beispiel ssh vorlesung.
+
 
 ---
 
-### Task 4: SCP File Transfers
+### Aufgabe 4: SCP-Dateiübertragungen
 
-**Objective:** Practice copying files securely using `scp`.
+**Ziel:** Über Sie das sichere Kopien von Dateien mit `scp`.
 
-1. **Local → Remote**:
+1. **Lokal → Fernbetreuung**:
 
    ```bash
-   scp /path/to/localfile.txt youruser@remotehost:~/destination/
+   scp/Pfad/zur/lokalen Datei.txt youruser@remotehost:~/Ziel/
    ```
-2. **Remote → Local**:
+2. **Fernbetreuung → Lokal**:
 
    ```bash
    scp youruser@remotehost:~/remotefile.log ./local_destination/
    ```
-3. **Remote → Remote** (between two directories on the same remote host):
+3. **Fernbetreuung → Fernbetreuung** (zwei Bewertungen auf demselben Remote-Host):
 
    ```bash
-   scp -r youruser@remotehost:/path/dir1 youruser@remotehost:/path/dir2
+   scp -r youruser@remotehost:/Pfad/Verzeichnis1 youruser@remotehost:/Pfad/Verzeichnis2
    ```
-4. For each command:
+4. Für jeden Befehl:
 
-   * Verify file timestamps and sizes after transfer, using `ls -la`
-   * Note any flags you used (e.g., `-r`, `-P` for port).
-5. Explain:
+   * Überprüfen Sie die Zeitstempel und Gräßen der Dateien nach der Überverfolgung mit `ls -la`
+   * Strand Sie alle Flaggen, die Sie verwendet haben (z. B `-r`, `-P` für Hafen).
+5. Erklären:
 
-   * How `scp` initiates an SSH session for each transfer.
-   * The role of encryption in protecting data in transit.
+   * Wie `scp` Initiiert für die Überverfolgung einer SSH-Sitzung.
+   * Die Rolle der Versicherung bei Schutz von Daten würrend des Transports.
 
-**Provide:**
+**Bereitstellen:**
 
 ```bash
-# 1) Each scp command you ran
-# 2) Any flags or options used
-# 3) A brief explanation (2–3 sentences) of scp’s mechanism
+# 1) Jeder scp-Befehl, den Sie ausgefüllt haben
+# 2) Alle verwendeten Flaggen oder Optionen
+# 3) Eine kurze Erklärung (2–3 Sitze) des Mechanismus von scp
 ```
+
+1) Lokal → Fernbetreuung:
+
+scp ./localfile.txt anaonymos@teuschlan:~/Ziel/
+
+Vorbereitung auf dem Remote-Server:
+
+ssh anaonymos@teuschlan 'ls -la ~/Ziel/lokale Datei.txt'
+
+2) Fernbetreuung → Lokal:
+
+scp anaonymos@teuschlanremotefile.log ./lokales_Ziel/
+
+Vorbereitung Lokal:
+
+ls -la ./local_destination/remotefile.log
+
+3) Fernbetreuung → Fernbetreuung:
+
+scp -r anaonymos@teuschlan:/Pfad/Verzeichnis1 anaonymos@teuschlan:/Pfad/Verzeichnis2
+
+Vorbereitung auf dem Remote-Server:
+
+ssh anaonymos@teuschlan 'ls -la/path/dir2'
+
+4) Verwendete Flaggen und Optionen:
+
+-r wird benutzt, wenn ein ganzes Verzeichnis kursiv kopiert werden soll.
+-P <HAFEN> Kann benutzt werden, wenn der SSH-Server nicht auf dem Standardport 22 Links.
+-i <SCHLÜSSELDATEI> Kann benutzt werden, wenn eine beste Schlüsseldatei verwendet werden soll.
+
+Beispiel mit Port:
+scp -P 2222 ./localfile.txt anaonymos@teuschlan:~/Ziel/
+
+5) Erkennung des SCP-Mechanismus:
+
+scp nutzt SSH als Verkehrsprotokoll und startet für jede Dateiobertragung eine verschlüsselte SSH-Verbindung. Dadurch werden sowohl Authentifizierungsdaten als auch die übertragenen Daten gegen Mitlesen und Manipulation im Netzwerk gegen. Die Syntax legt fest, ob Quelle oder Ziel lokal oder remote sind.
 
 ---
 
-### Task 5: Login Shell Script & Profile Explanation
+### Aufgabe 5: Login-Shell-Skript und Profilerstellung
 
-**Objective:** Automate commands at login and understand shell initialization files.
+**Ziel:** Automatisieren Sie Befehle bei Anmelden und verstehen Sie Shell-Initialisierungsdaten.
 
-1. On the **remote** server, create a script `~/login_tasks.sh` containing at least three commands you find useful (e.g., `echo "Welcome $(whoami)"`, `uptime`, `ls ~/projects`). You may either use `vim` or try the following to create a file from your commandline directely:
+1. Auf der **Fernbedienungen** Server, erste Sie ein Skript `~/login_tasks.sh` enthält mindestens drei Befehle, die Sie nützlich finden (z. B `echo "Willkommen $(whoami)"`, `Betriebszeit`, `ls ~/Projekt`). Sie können verwenden verwenden `vim` oder versuchen Sie Folgendes, um direkt über Ihre Befehlszeile eine Datei zu erst:
 
    ```bash
-   cat << 'EOF' > ~/login_tasks.sh
+   Katze << 'EOF' > ~/login_tasks.sh
    #!/usr/bin/env bash
-   echo "Welcome $(whoami)! Today is $(date)."
-   uptime
-   ls ~/projects
+   echo "Willkommen $(whoami)! Heute ist $(Datum)."
+   Betriebszeit
+   ls ~/Projekt
    EOF
    chmod +x ~/login_tasks.sh
    ```
 
-> The files content should be something akin to:
+> Der Inhalt der Dateien soll ungepflegt so aussehen:
 > ```bash
 > #!/usr/bin/env bash
-> echo "Welcome $(whoami)! Today is $(date)."
-> uptime
-> ls ~/projects
+> echo "Willkommen $(whoami)! Heute ist $(Datum)."
+> Betriebszeit
+> ls ~/Projekt
 > ```
 
-2. Append to your `~/.bashrc` (or `~/.profile` if using a login shell) a line to source this script on each new session:
+2. Anhängen an Ihre `~/.bashrc` (oder `~/.profil` wenn Sie eine Login-Shell verwenden) eine Zeile, um diese Skript bei jeder neuen Sitzung als Quelle zu verwenden:
 
    ```bash
-   echo "source ~/login_tasks.sh" >> ~/.bashrc
+   echo "Quelle ~/login_tasks.sh" >> ~/.bashrc
    ```
-3. Log out and log back in to trigger the script.
-4. Explain:
+3. Schmelzen Sie sich ab und schmelzen Sie sich wieder an, um das Skript auszulösen.
+4. Erklären:
 
-   * The difference between `~/.bashrc` and `~/.profile` (interactive vs. login shells).
-   * Why and when each file is read.
-   * How sourcing differs from executing.
+   * Der Unterschied zwischen `~/.bashrc` und `~/.profil` (Interaktiv vs. Login-Shells).
+   * Warum und will jede Datei gelesen wird.
+   * Wie sich Sourcing von der Ausbildung unterscheidet.
 
-**Provide:**
+**Bereitstellen:**
 
 ```bash
-# 1) The contents of login_tasks.sh
-# 2) The lines you added to ~/.bashrc or ~/.profile
-# 3) Your explanation (3–5 sentences) of shell init files and sourcing vs. executing
+# 1) Der Halt von login_tasks.sh
+scp anaonymos@teuschlanremotefile.log ./lokales_Ziel/
+# 3) Ihre Erfahrung (3–5 Sitze) zu Shell-Init-Dateien und Beschreibung vs. Ausbildung
 ```
+1) Halt von ~/login_tasks.sh auf dem Remote-Server:
+
+#!/usr/bin/env bash
+echo "Willkommen $(whoami)! Heute ist $(Datum)."
+Betriebszeit
+ls ~/Projekt
+
+2) Befehle zum Erstellen des Skripts:
+
+Katze << 'EOF' > ~/login_tasks.sh
+#!/usr/bin/env bash
+echo "Willkommen $(whoami)! Heute ist $(Datum)."
+Betriebszeit
+ls ~/Projekt
+EOF
+chmod +x ~/login_tasks.sh
+
+3) Zeile, die zu ~/.bashrc hinzugefugt wurde:
+
+echo "Quelle ~/login_tasks.sh" >> ~/.bashrc
+
+Alternative für Login-Shells:
+
+echo "Quelle ~/login_tasks.sh" >> ~/.Profil
+
+4) Erklärung:
+
+~/.bashrc wird normalerweise bei interaktiven Bash-Shells gelesen, zum Beispiel wenn eine neue Terminal-Sitzung gestartet wird. ~/.profile wird typischerweise bei Login-Shells gelesen, auch bei Anmelden an einem System. Welche Datei verwendet wird, hängt davon ab, ob die Shell als interaktive Shell oder als Login-Shell gestartet wird. Beim Sourcing mit Quelle ~/login_tasks.sh werden die Befehle im aktuellen Shell-Kontext ausgeben, werden bei direkter Ausgabe mit ./login_tasks.sh ein eigener Unterricht gesTartet umgürtet. Sourcing ist sinnvoll, wenn ein Skript Umgebungsvariablen oder Shell-Einstellungen der aktuellen Sitzung knapp soll.
 
 ---
 
-**Remember:** Stop working after **90 minutes** and record where you stopped.
+**Denken Sie an Daran:** Danach nicht mehr arbeiten **90 Minuten** und notieren Sie, wo Sie angehalten haben.
